@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register form</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+</head>
+<body>
+<form method="POST" th:action="@{/register}" th:object="${user}">
+    <div>Nazwa użytkownika: <input type="text" name="username" th:field="*{username}"
+                                   placeholder="Podaj nazwę użytkownika od 3 do 20 znaków"/></div>
+    <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+    <th:block th:if="${usernameError != null}">
+        <span class="error" th:text="${usernameError}"></span>
+    </th:block>
+    <div>Hasło: <input type="password" name="password" th:field="*{password}" placeholder="Podaj hasło min 8 znaków"/></div>
+    <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    <div>E-mail: <input type="email" name="email" th:field="*{email}" placeholder="email"/>
+        <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+        <th:block th:if="${emailError != null}">
+            <span class="error" th:text="${emailError}"></span>
+        </th:block>
+    </div>
+    <input type="submit" value="Zarejestruj się!"/>
+</form>
+<div>
+    <a th:href="@{/login}">Masz już konto? Zaloguj się!</a>
+</div>
+</body>
+</html>
